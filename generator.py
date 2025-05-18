@@ -55,7 +55,7 @@ class ImageGenerator:
                 pts2 = pts1 + shift
                 pts2 = np.float32(pts2)
                 M = cv2.getPerspectiveTransform(pts1, pts2)
-                canvas = cv2.warpPerspective(canvas, M, (self.width, self.height))       
+                canvas = cv2.warpPerspective(canvas, M, (self.width, self.height), borderMode=cv2.BORDER_REFLECT)       
 
             # Convert to grayscale if needed
             if self.mode == 'L':
