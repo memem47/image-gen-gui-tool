@@ -22,3 +22,11 @@ def test_image_save(tmp_path):
     save_path = tmp_path / "test_image.png"
     gen.save_image(image, save_path)
     assert os.path.exists(save_path)
+
+def test_random_image_content_shape():
+    gen = ImageGenerator()
+    image = gen.generate_random_image()
+    arr = np.array(image)
+    assert arr.shape == (256, 256, 3)  # Check for RGB image
+    assert arr.dtype == np.uint8  # Check for uint8 data type
+    assert image.mode == 'RGB'  # Check for RGB mode
