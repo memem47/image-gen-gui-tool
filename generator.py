@@ -13,12 +13,9 @@ class ImageGenerator:
         self.mode = mode
 
     def generate_random_image(self):
-        try:
-            if self.mode == 'RGB':
-                canvas = np.ones((self.height, self.width, 3), dtype=np.uint8) * 255
-            else:
-                canvas = np.ones((self.height, self.width), dtype=np.uint8) * 255
+        canvas = np.ones((self.height, self.width, 3), dtype=np.uint8) * 255
 
+        try:
             # random circle, square, and line
             for _ in range(random.randint(3, 10)):
                 color = tuple(np.random.randint(0, 256, size=3).tolist())
@@ -60,7 +57,11 @@ class ImageGenerator:
                 M = cv2.getPerspectiveTransform(pts1, pts2)
                 canvas = cv2.warpPerspective(canvas, M, (self.width, self.height))       
 
-            return Image.fromarray(canvas, mode=self.mode)
+            # Convert to grayscale if needed
+            if self.mode == 'L':
+                canvas = cv2.cvtColor(canvas, cv2.COLOR_BGR2GRAY)
+                
+            return Image.fromarray(canvas)
         except Exception as e:
             print(f"Error generating image: {e}")
             return None
