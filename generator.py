@@ -67,8 +67,9 @@ class ImageGenerator:
             return None
     
     def save_image(self, image, path=None):
-        if path is None:
-            os.makedirs('output', exist_ok=True)
-            now = datetime.now().strftime("%Y%m%d_%H%M%S")
-            path = os.path.join('output', f"image_{now}.png")
-        image.save(path)
+        ext = os.path.splitext(path)[1].lower()
+        if ext == ".raw":
+            with open(path, "wb") as f:
+                f.write(image.tobytes())
+        else:
+            image.save(path)
