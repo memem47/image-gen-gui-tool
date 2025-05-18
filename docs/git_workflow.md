@@ -10,6 +10,7 @@
     - Publicにする
     - README をチェック入れる
 
+✅ ステップ2: 開発用ローカル環境の準備
 
 ```bash
 # Bashコマンド
@@ -25,3 +26,16 @@ pip install --upgrade pip
 pip install opencv-python pillow numpy
 pip install pyinstaller  # EXE化用
 ```
+
+✅ ステップ3: 最小限のGUIベース作成（画像表示＋ランダム生成）
+
+main.py
+
+✅ ステップ4: .gitignoreとREADME.mdを追加
+
+.gitignore
+README.md
+
+✅ ステップ5: Git 操作手順（手順自体もドキュメント化）
+Git 操作の記録もドキュメントに追加する方法（docs/git_workflow.mdなど）
+
