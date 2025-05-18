@@ -33,6 +33,22 @@ class ImageGenerator:
                 pt2 = tuple(np.random.randint(0, self.width, size=2))
                 cv2.line(canvas, pt1, pt2, color, random.randint(1, 5))
 
+            # random polygon
+            for _ in range(random.randint(1, 5)):
+                color = tuple(np.random.randint(0, 256, size=3).tolist())
+                num_points = random.randint(3, 10)
+                points = np.random.randint(0, min(self.width, self.height), size=(num_points, 2))
+                points = points.reshape((-1, 1, 2))
+                cv2.fillPoly(canvas, [points], color)
+
+            # random ellipse
+            for _ in range(random.randint(1, 5)):
+                color = tuple(np.random.randint(0, 256, size=3).tolist())
+                center = tuple(np.random.randint(0, min(self.width, self.height), size=2))
+                axes = tuple(np.random.randint(self.width // 20, self.width // 5, size=2))
+                angle = random.randint(0, 360)
+                cv2.ellipse(canvas, center, axes, angle, 0, 360, color, -1)
+
             # random text
             for _ in range(random.randint(1, 30)):
                 color = tuple(np.random.randint(0, 256, size=3).tolist())
