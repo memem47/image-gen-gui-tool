@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog
 from PIL import ImageTk
 from generator import ImageGenerator
+import datetime
 
 class ImageGeneratorApp:
     def __init__(self, root):
@@ -28,6 +29,13 @@ class ImageGeneratorApp:
     def save_image(self):
         if self.image is None:
             return
-        path = filedialog.asksaveasfilename(defaultextension=".png")
+        now = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        default_filename = f"image_{now}.png"
+
+        path = filedialog.asksaveasfilename(
+            defaultextension=".png",
+            initialfile=default_filename,
+            filetypes=[("PNG files", "*.png"), ("All files", "*.*")]
+        )
         if path:
             self.generator.save_image(self.image, path)
