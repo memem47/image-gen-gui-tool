@@ -23,6 +23,14 @@ def test_image_save(tmp_path):
     gen.save_image(image, save_path)
     assert os.path.exists(save_path)
 
+def test_save_raw(tmp_path):
+    gen = ImageGenerator()
+    image = gen.generate_random_image()
+    save_path = tmp_path / "test_image.raw"
+    gen.save_image(image, save_path)
+    assert save_path.exists()
+    assert save_path.stat().st_size > 0
+
 def test_random_image_content_shape():
     gen = ImageGenerator()
     image = gen.generate_random_image()
